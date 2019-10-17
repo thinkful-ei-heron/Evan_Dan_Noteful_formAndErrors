@@ -9,6 +9,7 @@ import NoteView from './Note/NoteView';
 import NoteList from './Main/NoteList';
 import NoteContext from './NoteContext';
 import AddFolder from './AddFolder';
+import AddNote from './AddNote';
 
 export default class App extends Component {
   state = {
@@ -43,6 +44,25 @@ export default class App extends Component {
       .catch(err => console.log(err));
   };
 
+  addNote = (noteName, noteContent, folderId) => {
+    fetch(`http://localhost:9090/folders/${folderId}/notes`, {
+      method: 'POST',
+      body: JSON.stringify({ 
+        name: noteName,
+        content: noteContent
+       }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({ notes: [...this.state.notes, data] });
+      })
+      .catch(err => console.log(err));
+  };
+
   deleteNote = noteId => {
     fetch(`http://localhost:9090/notes/${noteId}`, {
       method: 'DELETE'
@@ -72,6 +92,7 @@ export default class App extends Component {
                 path="/note"
                 render={props => <NoteSidebar goBackEvent={e => props.history.goBack()} />}
               />
+              <Route exact path="/addNote" component={() => <AddNote addNote={this.addNote} />} />
               <Route path="/addFolder" component={() => <AddFolder addFolder={this.addFolder} />} />
               <Route path="/" component={() => <MainSidebar />} />
             </Switch>
