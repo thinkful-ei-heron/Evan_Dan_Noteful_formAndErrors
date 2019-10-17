@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ValidationError from './ValidationError';
 import PropTypes from 'prop-types';
+import './App.css';
 
 export default class AddFolder extends Component {
   state = {
