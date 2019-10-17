@@ -27,8 +27,7 @@ export default class App extends Component {
 
   deleteNote = noteId => {
     fetch(`http://localhost:9090/notes/${noteId}`, {
-      method: 'DELETE',
-      headers: { 'content-type': 'application/json' }
+      method: 'DELETE'
     })
       .then(this.setState({ notes: this.state.notes.filter(note => note.id !== noteId) }))
       .then(console.log(this.state.notes));
@@ -55,19 +54,15 @@ export default class App extends Component {
                 path="/note"
                 render={props => <NoteSidebar goBackEvent={e => props.history.goBack()} />}
               />
-
               <Route path="/" component={() => <MainSidebar />} />
             </Switch>
-
             <section className="mainSection">
               <Route exact path="/" component={() => <NoteList />} />
-
               <Route
                 exact
                 path="/:folderId"
                 render={props => <NoteList folderId={props.match.params.folderId} />}
               />
-
               <Route
                 exact
                 path="/note/:noteId"
