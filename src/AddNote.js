@@ -4,7 +4,7 @@ import ValidationError from './ValidationError';
 import NoteContext from './NoteContext';
 
 export default class AddNote extends Component {
-    static contextType = NoteContext;
+  static contextType = NoteContext;
 
   state = {
     id: '',
@@ -19,11 +19,11 @@ export default class AddNote extends Component {
   }
 
   updateContent(content) {
-      this.setState({ content: content})
+    this.setState({ content: content });
   }
 
   updateFolderId(folderId) {
-      this.setState({ folderId: folderId })
+    this.setState({ folderId: folderId });
   }
 
   validateName() {
@@ -39,12 +39,12 @@ export default class AddNote extends Component {
       return 'Content is required';
     }
   }
-  
+
   validateSelect() {
-      const select = this.state.folderId;
-      if (select === 'Select Your Folder' || !select) {
-          return 'Choose a folder for your note';
-      }
+    const select = this.state.folderId;
+    if (select === 'Select Your Folder' || !select) {
+      return 'Choose a folder for your note';
+    }
   }
 
   handleSubmit(event) {
@@ -67,17 +67,25 @@ export default class AddNote extends Component {
         <ValidationError message={contentError} />
 
         <label htmlFor="selectFolder">Select a folder for your note</label>
-        <select required name="selectFolder" id="selectFolder" onChange={e => this.updateFolderId(e.target.value)}>
-            <option>Select Your Folder</option>
-        {folders.map(folder => (
+        <select
+          required
+          name="selectFolder"
+          id="selectFolder"
+          onChange={e => this.updateFolderId(e.target.value)}
+        >
+          <option>Select Your Folder</option>
+          {folders.map(folder => (
             <option value={folder.id}>{folder.name}</option>
-        ))}
+          ))}
         </select>
-        
+
         <Link to="/">
           <button type="reset">Cancel</button>
         </Link>
-        <button type="submit" disabled={this.validateName() || this.validateContent() || this.validateSelect()}>
+        <button
+          type="submit"
+          disabled={this.validateName() || this.validateContent() || this.validateSelect()}
+        >
           Submit
         </button>
       </form>

@@ -3,9 +3,14 @@ import Note from '../Note/Note';
 import './NoteList.css';
 import NoteContext from '../NoteContext';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class NoteList extends Component {
   static contextType = NoteContext;
+
+  static propTypes = {
+    folderId: PropTypes.number
+  };
 
   render() {
     let notes = this.context.notes;

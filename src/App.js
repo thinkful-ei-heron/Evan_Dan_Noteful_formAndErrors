@@ -10,6 +10,7 @@ import NoteList from './Main/NoteList';
 import NoteContext from './NoteContext';
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
+import ErrorPage from './ErrorPage.js';
 
 export default class App extends Component {
   state = {
@@ -47,7 +48,8 @@ export default class App extends Component {
       method: 'POST',
       body: JSON.stringify({
         name: noteName,
-        content: noteContent
+        content: noteContent,
+        modified: Date.now()
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -97,17 +99,19 @@ export default class App extends Component {
               <Route path="/" component={() => <MainSidebar />} />
             </Switch>
             <section className="mainSection">
-              <Route exact path="/" component={() => <NoteList />} />
-              <Route
-                exact
-                path="/:folderId"
-                render={props => <NoteList folderId={props.match.params.folderId} />}
-              />
-              <Route
-                exact
-                path="/note/:noteId"
-                render={props => <NoteView noteId={props.match.params.noteId} />}
-              />
+              <ErrorPage>
+                <Route exact path="/" component={() => <NoteList />} />
+                <Route
+                  exact
+                  path="/:folderId"
+                  render={props => <NoteList folderId={props.match.params.folderId} />}
+                />
+                <Route
+                  exact
+                  path="/note/:noteId"
+                  render={props => <NoteView noteId={props.match.params.noteId} />}
+                />
+              </ErrorPage>
             </section>
           </main>
         </NoteContext.Provider>
