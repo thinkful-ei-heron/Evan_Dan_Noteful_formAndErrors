@@ -37,9 +37,7 @@ export default class App extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({ folders: [...this.state.folders, data] });
-        console.log(this.state.folders);
       })
       .catch(err => console.log(err));
   };
@@ -47,18 +45,20 @@ export default class App extends Component {
   addNote = (noteName, noteContent, folderId) => {
     fetch(`http://localhost:9090/folders/${folderId}/notes`, {
       method: 'POST',
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         name: noteName,
         content: noteContent
-       }),
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        console.log(data);
         this.setState({ notes: [...this.state.notes, data] });
+        console.log(this.state.notes);
+        console.log(NoteContext.notes);
       })
       .catch(err => console.log(err));
   };

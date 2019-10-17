@@ -7,7 +7,10 @@ export default class NoteView extends Component {
   static contextType = NoteContext;
   render() {
     const { folders, notes } = this.context;
-    let note = notes.find(note => note.id === this.props.noteId);
+    console.log(notes);
+    console.log(this.props.noteId);
+
+    let note = notes.find(note => note.id == this.props.noteId);
     console.log(note);
     return (
       <>

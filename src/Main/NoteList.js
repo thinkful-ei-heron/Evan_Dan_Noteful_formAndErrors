@@ -19,7 +19,7 @@ export default class NoteList extends Component {
           ))}
           <li>
             <Link to="/addNote">
-            <button className="addNote">Add Note</button>
+              <button className="addNote">Add Note</button>
             </Link>
           </li>
         </ul>
