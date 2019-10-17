@@ -15,7 +15,7 @@ export default class NoteView extends Component {
     return (
       <>
         <ul className="noteContainer">
-          <Note key={note.id} id={note.id} name={note.name} date={note.modified} description={note.content} />
+          <Note key={note.id} id={note.id} name={note.name} date={new Date(note.modified).toDateString()} description={note.content} />
         </ul>
         <div className="folderName">
           <h2>{folders.find(folder => folder.id === note.folderId).name}</h2>

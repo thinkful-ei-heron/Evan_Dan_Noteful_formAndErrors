@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ValidationError from './ValidationError';
 import NoteContext from './NoteContext';
+import './App.css';
 
 export default class AddNote extends Component {
   static contextType = NoteContext;
@@ -61,10 +62,10 @@ export default class AddNote extends Component {
       <form name="addNote" onSubmit={e => this.handleSubmit(e)}>
         <label htmlFor="name">Note Name</label>
         <input name="name" id="name" type="text" onChange={e => this.updateName(e.target.value)} />
-        <ValidationError message={nameError} />
+        <ValidationError className="error" message={nameError} />
         <label htmlFor="content">Note Content</label>
         <input name="content" id="content" type="text" onChange={e => this.updateContent(e.target.value)} />
-        <ValidationError message={contentError} />
+        <ValidationError className="error" message={contentError} />
 
         <label htmlFor="selectFolder">Select a folder for your note</label>
         <select
