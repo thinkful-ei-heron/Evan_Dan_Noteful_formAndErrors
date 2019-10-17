@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Note.css';
 import NoteContext from '../NoteContext';
+import PropTypes from 'prop-types';
 
 export default class Note extends Component {
   static contextType = NoteContext;
+
+  static propTypes = {
+    date: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    description: PropTypes.string
+  };
 
   render() {
     const deleteNote = this.context.deleteNote;

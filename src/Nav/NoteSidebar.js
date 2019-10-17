@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function NoteSidebar(props) {
   return (
@@ -9,3 +10,7 @@ export default function NoteSidebar(props) {
     </nav>
   );
 }
+
+NoteSidebar.propTypes = {
+  goBackEvent: PropTypes.func
+};

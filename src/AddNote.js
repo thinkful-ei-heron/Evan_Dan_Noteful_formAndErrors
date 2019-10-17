@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ValidationError from './ValidationError';
 import NoteContext from './NoteContext';
+import PropTypes from 'prop-types';
 
 export default class AddNote extends Component {
   static contextType = NoteContext;
+
+  static propTypes = {
+    addNote: PropTypes.func
+  };
 
   state = {
     id: '',

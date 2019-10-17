@@ -9,7 +9,7 @@ export default class NoteList extends Component {
   static contextType = NoteContext;
 
   static propTypes = {
-    folderId: PropTypes.number
+    folderId: PropTypes.string
   };
 
   render() {

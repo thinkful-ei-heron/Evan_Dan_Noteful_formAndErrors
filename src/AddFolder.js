@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ValidationError from './ValidationError';
+import PropTypes from 'prop-types';
 
 export default class AddFolder extends Component {
   state = {
     id: '',
     name: ''
+  };
+
+  static propTypes = {
+    addFolder: PropTypes.func
   };
 
   updateName(name) {

@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import Note from './Note';
 import './NoteView.css';
 import NoteContext from '../NoteContext';
+import PropTypes from 'prop-types';
 
 export default class NoteView extends Component {
   static contextType = NoteContext;
+
+  static propTypes = {
+    noteId: PropTypes.string
+  };
   render() {
     const { folders, notes } = this.context;
     console.log(notes);
