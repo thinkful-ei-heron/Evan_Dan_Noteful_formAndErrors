@@ -25,7 +25,9 @@ export default class MainSidebar extends Component {
     return (
       <nav className="sideBar">
         {this.folderButtons(folders)}
-        <button className="addBtn">Add Folder</button>
+        <Link to="/addFolder">
+          <button className="addBtn">Add Folder</button>
+        </Link>
       </nav>
     );
   }
