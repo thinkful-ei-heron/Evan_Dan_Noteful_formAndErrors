@@ -14,7 +14,9 @@ export default class NoteList extends Component {
 
   render() {
     let notes = this.context.notes;
-    if (this.props.folderId) notes = notes.filter(note => note.folderId === this.props.folderId);
+    console.log(notes);
+    console.log('in notesList folderId prop is ' + this.props.folderId);
+    if (this.props.folderId) notes = notes.filter(note => note.folder_id == this.props.folderId);
 
     return (
       <>

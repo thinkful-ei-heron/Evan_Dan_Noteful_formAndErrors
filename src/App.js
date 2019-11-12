@@ -10,7 +10,8 @@ import NoteList from './Main/NoteList';
 import NoteContext from './NoteContext';
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
-import ErrorPage from './ErrorPage.js';
+import ErrorPage from './ErrorPage';
+import history from './history';
 
 export default class App extends Component {
   state = {
@@ -19,17 +20,17 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:9090/folders')
+    fetch('http://localhost:8000/api/folders')
       .then(res => res.json())
       .then(data => this.setState({ folders: data }));
 
-    fetch('http://localhost:9090/notes')
+    fetch('http://localhost:8000/api/notes')
       .then(res => res.json())
       .then(data => this.setState({ notes: data }));
   }
 
   addFolder = folderName => {
-    fetch('http://localhost:9090/folders', {
+    fetch('http://localhost:8000/api/folders', {
       method: 'POST',
       body: JSON.stringify({ name: folderName }),
       headers: {
@@ -39,17 +40,18 @@ export default class App extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({ folders: [...this.state.folders, data] });
+        history.push('/');
       })
       .catch(err => console.log(err));
   };
 
   addNote = (noteName, noteContent, folderId) => {
-    fetch(`http://localhost:9090/folders/${folderId}/notes`, {
+    fetch(`http://localhost:8000/api/notes`, {
       method: 'POST',
       body: JSON.stringify({
         name: noteName,
         content: noteContent,
-        modified: Date.now()
+        folder_id: folderId
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -57,16 +59,14 @@ export default class App extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({ notes: [...this.state.notes, data] });
-        console.log(this.state.notes);
-        console.log(NoteContext.notes);
+        history.push('/');
       })
       .catch(err => console.log(err));
   };
 
   deleteNote = noteId => {
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`http://localhost:8000/api/notes/${noteId}`, {
       method: 'DELETE'
     })
       .then(this.setState({ notes: this.state.notes.filter(note => note.id !== noteId) }))

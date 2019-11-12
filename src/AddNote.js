@@ -55,7 +55,7 @@ export default class AddNote extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addNote(this.state.name, this.state.content, this.state.folderId, this.state.id);
+    this.props.addNote(this.state.name, this.state.content, this.state.folderId);
   }
 
   render() {

@@ -10,7 +10,7 @@ export default class Note extends Component {
   static propTypes = {
     date: PropTypes.string,
     name: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
     description: PropTypes.string
   };
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './MainSidebar.css';
 import NoteContext from '../NoteContext';
+import history from '../history';
 
 export default class MainSidebar extends Component {
   static contextType = NoteContext;
@@ -11,9 +12,10 @@ export default class MainSidebar extends Component {
       <ul className="sideNav">
         {folders.map(folder => (
           <li>
-            <Link to={folder.id}>
-              <button className="folderButton">{folder.name}</button>
-            </Link>
+            {console.log('folder id is ' + folder.id)}
+            <button className="folderButton" onClick={() => history.push(`/${folder.id}`)}>
+              {folder.name}
+            </button>
           </li>
         ))}
       </ul>
