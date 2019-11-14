@@ -12,11 +12,8 @@ export default class NoteView extends Component {
   };
   render() {
     const { folders, notes } = this.context;
-    console.log(notes);
-    console.log(this.props.noteId);
 
     let note = notes.find(note => note.id == this.props.noteId);
-    console.log(note);
     return (
       <>
         <ul className="noteContainer">

@@ -12,7 +12,6 @@ export default class MainSidebar extends Component {
       <ul className="sideNav">
         {folders.map(folder => (
           <li>
-            {console.log('folder id is ' + folder.id)}
             <button className="folderButton" onClick={() => history.push(`/${folder.id}`)}>
               {folder.name}
             </button>

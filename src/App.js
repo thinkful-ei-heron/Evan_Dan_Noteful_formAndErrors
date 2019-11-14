@@ -19,18 +19,20 @@ export default class App extends Component {
     notes: []
   };
 
+  BASE_URL = 'https://stormy-sierra-19573.herokuapp.com';
+
   componentDidMount() {
-    fetch('http://localhost:8000/api/folders')
+    fetch(`${this.BASE_URL}/api/folders`)
       .then(res => res.json())
       .then(data => this.setState({ folders: data }));
 
-    fetch('http://localhost:8000/api/notes')
+    fetch(`https://stormy-sierra-19573.herokuapp.com/api/notes`)
       .then(res => res.json())
       .then(data => this.setState({ notes: data }));
   }
 
   addFolder = folderName => {
-    fetch('http://localhost:8000/api/folders', {
+    fetch(`${this.BASE_URL}/api/folders`, {
       method: 'POST',
       body: JSON.stringify({ name: folderName }),
       headers: {
@@ -46,7 +48,7 @@ export default class App extends Component {
   };
 
   addNote = (noteName, noteContent, folderId) => {
-    fetch(`http://localhost:8000/api/notes`, {
+    fetch(`${this.BASE_URL}/api/notes`, {
       method: 'POST',
       body: JSON.stringify({
         name: noteName,
@@ -66,11 +68,9 @@ export default class App extends Component {
   };
 
   deleteNote = noteId => {
-    fetch(`http://localhost:8000/api/notes/${noteId}`, {
+    fetch(`${this.BASE_URL}/api/notes/${noteId}`, {
       method: 'DELETE'
-    })
-      .then(this.setState({ notes: this.state.notes.filter(note => note.id !== noteId) }))
-      .then(console.log(this.state.notes));
+    }).then(this.setState({ notes: this.state.notes.filter(note => note.id !== noteId) }));
   };
 
   render() {
